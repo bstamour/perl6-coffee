@@ -1,0 +1,18 @@
+The purpose of this script is to help you make better tasting
+coffee. Simply run it from your command line with the number of 6oz
+servings you wish to make, and (optionally) specifying your coffee
+brand and strength. The default (and so far only) brand supported is
+Maxwell House. The default strength is "strong", but other options are
+"weak" and "normal." Strength merely instructs the program to round
+the number of tablespoons of grounds up (if strong) or down (if weak)
+or do no rounding (normal).
+
+The plan is to eventually add more coffee brands to this script in due
+time (i.e., whenever I switch coffee brands, or whenever someone sends
+me a pull request :-)). The script is written in Perl 6, so you will
+need a Perl 6 interpreter installed to run it.
+
+Example invocation:
+
+./coffee --strength=weak 12   # A full pot of weak coffee
+9 tbsp
