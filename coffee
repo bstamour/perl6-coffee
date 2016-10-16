@@ -20,12 +20,12 @@ my %brews = (
 	# oz), use 1 tablespoon of grounds.  For 10 servings, use 8
 	# tbsp. Therefore by interpolation, we arive at the below
 	# linear function.
-	7 / 9 * $x;
+	7 / 9 * $x
     },
-    # Folgers uses (according to their online calculator) a 1-to-1
-    # mapping between servings and tablespoons of grounds. Nice and
-    # easy.
     folgers => -> $x {
+	# Folgers uses (according to their online calculator) a 1-to-1
+	# mapping between servings and tablespoons of grounds. Nice
+	# and easy.
 	$x
     }
 );
