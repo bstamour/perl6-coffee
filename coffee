@@ -21,6 +21,12 @@ my %brews = (
 	# tbsp. Therefore by interpolation, we arive at the below
 	# linear function.
 	7 / 9 * $x;
+    },
+    # Folgers uses (according to their online calculator) a 1-to-1
+    # mapping between servings and tablespoons of grounds. Nice and
+    # easy.
+    folgers => -> $x {
+	$x
     }
 );
 
