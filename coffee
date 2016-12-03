@@ -20,7 +20,7 @@ my %brews = (
 	# oz), use 1 tablespoon of grounds.  For 10 servings, use 8
 	# tbsp. Therefore by interpolation, we arive at the below
 	# linear function.
-	7 / 9 * $x
+	$x < 1 ?? $x !! 7 / 9 * $x + 2 / 9
     },
     folgers => -> $x {
 	# Folgers uses (according to their online calculator) a 1-to-1
@@ -34,20 +34,24 @@ my %brews = (
 # for parameter correctness.
 subset Positive of Numeric where * > 0;
 subset Brand    of Any     where { %brews{$_}:exists };
-subset Strength of Str     where * eq 'strong' | 'weak' | 'normal';
+subset Strength of Str     where * eq 'strong' | 'weak' | 'normal' | 'raw';
 
 sub MAIN(Positive $servings,
 	 Brand    :$brand    = 'maxwell-house',
-	 Strength :$strength = 'strong')
-{
+	 Strength :$strength = 'normal') {
     my $amount = %brews{$brand}($servings);
-    $amount    = ceiling($amount) if $strength eq 'strong';
-    $amount    = floor($amount)   if $strength eq 'weak';
+
+    $amount = do given $strength {
+	when 'strong' { ceiling $amount }
+	when 'weak'   { floor $amount }
+	when 'normal' { (round(4 * $amount) / 4) }
+	default       { $amount }
+    }
+
     say "$amount tbsp";
 }
 
-sub USAGE
-{
+sub USAGE {
     say "Usage:";
     say "  coffee [--brand=brand] [--strength=(weak|strong|normal)] <serving>";
     say '';
