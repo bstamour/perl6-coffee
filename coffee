@@ -33,6 +33,10 @@ my %brews = (
   folgers-strong => -> $x {
     2 * $x
   },
+  # 10 grams for one serving. A tablespoon is approximately 15 grams.
+  starbucks-yukon => -> $x {
+    10 / 15 * $x
+  },
   # From lifehacker (of all places). Maybe try this out with some
   # regular old coffee and see how it tastes.
   generic => -> $x {
